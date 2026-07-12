@@ -1,0 +1,26 @@
+/* Phat Ducky — color tokens
+   Core palette is client-supplied (Coolors export).
+   Accents are eyedropped from the master mascot artwork — confirm
+   exact values once isolated source layers are available. */
+
+:root {
+  /* core palette — surfaces & text */
+  --pd-bone:  #E8E0CA;
+  --pd-dusk:  #80596A;
+  --pd-slate: #2E333C;
+  --pd-umber: #2A1F22;
+  --pd-ink:   #151A22;
+
+  /* accents — used one at a time, gold leads */
+  --pd-gold-300: #F4CE73;
+  --pd-gold-500: #E3A62E;
+  --pd-gold-700: #8A5A18;
+
+  --pd-leaf-300: #AED374;
+  --pd-leaf-500: #86B944;
+  --pd-leaf-700: #4C6B24;
+
+  --pd-grape-300: #B57FC7;
+  --pd-grape-500: #8C4FA0;
+  --pd-grape-700: #5C2F6E;
+}

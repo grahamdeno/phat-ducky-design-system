@@ -1,0 +1,687 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Phat Ducky — Brand &amp; Design System</title>
+<style>
+  /* ---------------------------------------------------------
+     TOKENS
+  --------------------------------------------------------- */
+  :root{
+    --bg-canvas:#151A22;
+    --bg-surface:#1B212A;
+    --bg-panel:#2A1F22;
+    --border:#3A3038;
+    --border-soft:#2E333C;
+    --text-primary:#F1EBD9;
+    --text-secondary:#B4A992;
+    --text-tertiary:#7C7565;
+
+    --dusk:#80596A;
+    --gold-300:#F4CE73;
+    --gold-500:#E3A62E;
+    --gold-700:#8A5A18;
+    --leaf-300:#AED374;
+    --leaf-500:#86B944;
+    --leaf-700:#4C6B24;
+    --grape-300:#B57FC7;
+    --grape-500:#8C4FA0;
+    --grape-700:#5C2F6E;
+
+    --shadow-hard:0 2px 0 rgba(0,0,0,.55);
+    --radius-tag:2px;
+    --radius-pill:999px;
+
+    color-scheme: dark;
+  }
+
+  @media (prefers-color-scheme: light){
+    :root{
+      --bg-canvas:#E8E0CA;
+      --bg-surface:#F4EFE0;
+      --bg-panel:#FBF7EA;
+      --border:#D6C9A8;
+      --border-soft:#DDD2B8;
+      --text-primary:#241A1B;
+      --text-secondary:#5B4C41;
+      --text-tertiary:#8A7A68;
+
+      --dusk:#80596A;
+      --gold-300:#B9821F;
+      --gold-500:#8A5B14;
+      --gold-700:#5E3D0D;
+      --leaf-300:#5D7E31;
+      --leaf-500:#4C6B24;
+      --leaf-700:#374E19;
+      --grape-300:#7A4B8C;
+      --grape-500:#6A3E7C;
+      --grape-700:#4A2A58;
+
+      color-scheme: light;
+    }
+  }
+
+  :root[data-theme="dark"]{
+    --bg-canvas:#151A22; --bg-surface:#1B212A; --bg-panel:#2A1F22;
+    --border:#3A3038; --border-soft:#2E333C;
+    --text-primary:#F1EBD9; --text-secondary:#B4A992; --text-tertiary:#7C7565;
+    --dusk:#80596A;
+    --gold-300:#F4CE73; --gold-500:#E3A62E; --gold-700:#8A5A18;
+    --leaf-300:#AED374; --leaf-500:#86B944; --leaf-700:#4C6B24;
+    --grape-300:#B57FC7; --grape-500:#8C4FA0; --grape-700:#5C2F6E;
+    color-scheme: dark;
+  }
+  :root[data-theme="light"]{
+    --bg-canvas:#E8E0CA; --bg-surface:#F4EFE0; --bg-panel:#FBF7EA;
+    --border:#D6C9A8; --border-soft:#DDD2B8;
+    --text-primary:#241A1B; --text-secondary:#5B4C41; --text-tertiary:#8A7A68;
+    --dusk:#80596A;
+    --gold-300:#B9821F; --gold-500:#8A5B14; --gold-700:#5E3D0D;
+    --leaf-300:#5D7E31; --leaf-500:#4C6B24; --leaf-700:#374E19;
+    --grape-300:#7A4B8C; --grape-500:#6A3E7C; --grape-700:#4A2A58;
+    color-scheme: light;
+  }
+
+  /* ---------------------------------------------------------
+     BASE
+  --------------------------------------------------------- */
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--bg-canvas);
+    color:var(--text-primary);
+    font-family:-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  .mono{
+    font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  }
+  ::selection{ background:var(--gold-500); color:var(--bg-canvas); }
+  @media (prefers-reduced-motion: reduce){
+    *{ animation-duration:.001ms !important; transition-duration:.001ms !important; }
+  }
+
+  .sheet{
+    max-width:920px;
+    margin:0 auto;
+    padding:56px 28px 96px;
+  }
+
+  a{ color:inherit; }
+  img,svg{ max-width:100%; }
+
+  /* ---------------------------------------------------------
+     SHARED PLATE FRAME
+  --------------------------------------------------------- */
+  .plate{ margin-top:88px; }
+  .plate:first-of-type{ margin-top:0; }
+  .plate-head{
+    position:relative;
+    display:flex;
+    align-items:baseline;
+    gap:14px;
+    padding:10px 0 14px;
+    border-bottom:1px solid var(--border-soft);
+    margin-bottom:28px;
+  }
+  .plate-num{
+    font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+    font-size:13px;
+    letter-spacing:.08em;
+    color:var(--gold-500);
+    border:1px solid var(--gold-700);
+    padding:2px 7px;
+    border-radius:var(--radius-tag);
+  }
+  .plate-title{
+    font-family:"Arial Black",Arial,sans-serif;
+    font-weight:900;
+    font-size:22px;
+    letter-spacing:.02em;
+    text-transform:uppercase;
+    margin:0;
+  }
+  .plate-sub{
+    margin-left:auto;
+    font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+    font-size:11px;
+    letter-spacing:.06em;
+    color:var(--text-tertiary);
+    text-transform:uppercase;
+  }
+
+  p{ max-width:64ch; color:var(--text-secondary); }
+  .lede{ font-size:18px; color:var(--text-primary); max-width:60ch; }
+
+  /* ---------------------------------------------------------
+     HERO
+  --------------------------------------------------------- */
+  .hero{
+    background:var(--bg-panel);
+    border:1px solid var(--border);
+    padding:48px 32px 36px;
+    position:relative;
+  }
+  .hero::before,.hero::after{
+    content:"";
+    position:absolute;
+    width:20px; height:20px;
+    border-color:var(--gold-500);
+    border-style:solid;
+  }
+  .hero::before{ top:14px; left:14px; border-width:2px 0 0 2px; }
+  .hero::after{ bottom:14px; right:14px; border-width:0 2px 2px 0; }
+
+  .hero-grid{
+    display:flex;
+    gap:36px;
+    align-items:center;
+    flex-wrap:wrap;
+  }
+  .hero-copy{ flex:1; min-width:280px; }
+  .hero-art{ flex:none; width:180px; }
+  .hero-art img{
+    width:100%;
+    height:auto;
+    display:block;
+    filter:drop-shadow(0 10px 22px rgba(0,0,0,.5));
+  }
+  @media (max-width:640px){
+    .hero-grid{ flex-direction:column-reverse; }
+    .hero-art{ width:150px; margin:0 auto; }
+  }
+
+  .eyebrow{
+    font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+    font-size:11px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--gold-500);
+    margin:0 0 18px;
+  }
+  .wordmark{
+    font-family:"Arial Black",Arial,sans-serif;
+    font-weight:900;
+    font-size:clamp(52px,10vw,96px);
+    line-height:.86;
+    letter-spacing:-.01em;
+    text-transform:uppercase;
+    margin:0;
+    text-wrap:balance;
+    transform:skewX(-4deg);
+    transform-origin:left;
+  }
+  .wordmark .line1{ display:block; color:var(--text-primary); }
+  .wordmark .line2{
+    display:block;
+    background:linear-gradient(180deg,var(--gold-300) 0%,var(--gold-500) 46%,var(--gold-700) 100%);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+    text-shadow:0 2px 0 rgba(0,0,0,.35);
+  }
+  .tagline{
+    margin:20px 0 0;
+    font-size:15px;
+    letter-spacing:.02em;
+    color:var(--text-secondary);
+    max-width:46ch;
+  }
+  .tagline b{ color:var(--text-primary); font-weight:600; }
+
+  .hero-meta{
+    display:flex;
+    gap:28px;
+    flex-wrap:wrap;
+    margin-top:32px;
+    padding-top:20px;
+    border-top:1px solid var(--border-soft);
+  }
+  .hero-meta div{ font-size:12px; }
+  .hero-meta dt{
+    font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+    text-transform:uppercase;
+    letter-spacing:.08em;
+    color:var(--text-tertiary);
+    margin:0 0 3px;
+  }
+  .hero-meta dd{ margin:0; color:var(--text-primary); }
+
+  /* ---------------------------------------------------------
+     VOICE
+  --------------------------------------------------------- */
+  .voice-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:1px;
+    background:var(--border-soft);
+    border:1px solid var(--border-soft);
+    margin-top:8px;
+  }
+  .voice-card{ background:var(--bg-surface); padding:20px 22px; }
+  .voice-card h3{ font-size:14px; margin:0 0 8px; text-transform:uppercase; letter-spacing:.04em; }
+  .voice-card p{ margin:0; font-size:14px; }
+  @media (max-width:640px){ .voice-grid{ grid-template-columns:1fr; } }
+
+  /* ---------------------------------------------------------
+     COLOR SYSTEM
+  --------------------------------------------------------- */
+  .swatch-note{ margin-top:2px; margin-bottom:24px; }
+  .swatch-row{ display:grid; grid-template-columns:repeat(5,1fr); gap:12px; margin-bottom:14px; }
+  .swatch-row.accents{ grid-template-columns:repeat(3,1fr); max-width:560px; }
+  @media (max-width:700px){ .swatch-row{ grid-template-columns:repeat(2,1fr); } }
+  .swatch{ border:1px solid var(--border); background:var(--bg-surface); }
+  .swatch-fill{ height:96px; border-bottom:1px solid var(--border); }
+  .swatch-label{ padding:9px 10px 11px; }
+  .swatch-role{ font-size:12.5px; font-weight:600; margin:0 0 2px; }
+  .swatch-hex{ font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; font-size:11px; color:var(--text-tertiary); margin:0; }
+  .section-label{
+    font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+    font-size:11px; letter-spacing:.1em; text-transform:uppercase;
+    color:var(--text-tertiary); margin:32px 0 12px;
+  }
+  .section-label:first-child{ margin-top:0; }
+
+  /* ---------------------------------------------------------
+     TYPE SPECIMEN
+  --------------------------------------------------------- */
+  .specimen{ border:1px solid var(--border); background:var(--bg-surface); padding:28px 26px; margin-bottom:14px; }
+  .specimen .display-line{
+    font-family:"Arial Black",Arial,sans-serif; font-weight:900;
+    text-transform:uppercase; letter-spacing:-.005em; margin:0 0 6px; color:var(--text-primary);
+  }
+  .specimen .meta{
+    font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+    font-size:11px; color:var(--text-tertiary); letter-spacing:.04em; text-transform:uppercase;
+  }
+  .type-scale{ width:100%; border-collapse:collapse; margin-top:6px; }
+  .type-scale th,.type-scale td{ text-align:left; padding:9px 10px; border-bottom:1px solid var(--border-soft); font-size:13px; }
+  .type-scale th{
+    font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+    font-size:11px; text-transform:uppercase; letter-spacing:.06em; color:var(--text-tertiary); font-weight:400;
+  }
+  .type-scale td.num{ font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; font-variant-numeric:tabular-nums; color:var(--text-secondary); }
+
+  /* ---------------------------------------------------------
+     LOGO USAGE
+  --------------------------------------------------------- */
+  .lockup-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin:8px 0 28px; }
+  @media (max-width:700px){ .lockup-grid{ grid-template-columns:1fr; } }
+  .lockup-slot{
+    border:1.5px dashed var(--gold-700);
+    background:repeating-linear-gradient(45deg, transparent 0 8px, rgba(227,166,46,.05) 8px 16px);
+    background-color:var(--bg-panel);
+    min-height:150px;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    text-align:center; gap:6px; padding:16px;
+  }
+  .lockup-slot .plus{ font-size:22px; color:var(--gold-700); line-height:1; }
+  .lockup-slot .slot-name{ font-size:12.5px; font-weight:600; color:var(--text-primary); }
+  .lockup-slot .slot-file{ font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; font-size:10.5px; color:var(--text-tertiary); }
+  .lockup-slot.filled{ border-style:solid; background-image:none; }
+  .lockup-slot.filled img{ max-width:100%; max-height:112px; width:auto; object-fit:contain; margin-bottom:2px; }
+
+  .clearspace{
+    border:1px solid var(--border); background:var(--bg-surface); padding:26px;
+    display:flex; gap:26px; align-items:center; flex-wrap:wrap; margin-bottom:28px;
+  }
+  .clearspace-diagram{ width:150px; height:150px; flex:none; position:relative; border:1.5px dotted var(--gold-700); }
+  .clearspace-diagram .inner{
+    position:absolute; inset:26px; border:1px solid var(--border); background:var(--bg-panel);
+    display:flex; align-items:center; justify-content:center;
+    font-family:"Arial Black",Arial,sans-serif; font-weight:900; color:var(--gold-500); font-size:26px;
+  }
+  .clearspace-diagram .arrow{ position:absolute; font-family:ui-monospace,monospace; font-size:10px; color:var(--text-tertiary); }
+  .clearspace-diagram .arrow.top{ top:8px; left:50%; transform:translateX(-50%); }
+  .clearspace-diagram .arrow.bottom{ bottom:8px; left:50%; transform:translateX(-50%); }
+  .clearspace p{ margin:0; font-size:14px; max-width:38ch; }
+  .clearspace p b{ color:var(--text-primary); }
+
+  .rules-grid{ display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-top:8px; }
+  @media (max-width:700px){ .rules-grid{ grid-template-columns:1fr; } }
+  .rules-grid h4{ font-size:12px; text-transform:uppercase; letter-spacing:.08em; margin:0 0 10px; color:var(--text-tertiary); }
+  .rule-item{ display:flex; gap:10px; align-items:flex-start; font-size:13.5px; padding:8px 0; border-bottom:1px solid var(--border-soft); }
+  .rule-item:last-child{ border-bottom:none; }
+  .mark{ flex:none; width:16px; height:16px; margin-top:2px; position:relative; }
+  .mark.ok::before{
+    content:""; position:absolute; left:2px; top:6px; width:5px; height:9px;
+    border-right:2px solid var(--leaf-500); border-bottom:2px solid var(--leaf-500); transform:rotate(38deg);
+  }
+  .mark.no::before,.mark.no::after{ content:""; position:absolute; top:7px; left:1px; width:14px; height:2px; background:var(--dusk); }
+  .mark.no::before{ transform:rotate(45deg); }
+  .mark.no::after{ transform:rotate(-45deg); }
+
+  /* ---------------------------------------------------------
+     COMPONENTS
+  --------------------------------------------------------- */
+  .comp-block{ border:1px solid var(--border); background:var(--bg-surface); padding:24px; margin-bottom:16px; }
+  .comp-row{ display:flex; gap:12px; flex-wrap:wrap; align-items:center; }
+  .btn{
+    font-family:inherit; font-size:13.5px; font-weight:700; letter-spacing:.02em;
+    padding:11px 20px; border-radius:var(--radius-tag); cursor:pointer; text-transform:uppercase;
+    border:1.5px solid transparent; transition:transform .12s ease, box-shadow .12s ease;
+  }
+  .btn:focus-visible{ outline:2px solid var(--gold-300); outline-offset:2px; }
+  .btn-primary{ background:var(--gold-500); color:var(--bg-canvas); box-shadow:var(--shadow-hard); }
+  .btn-primary:hover{ transform:translateY(-1px); box-shadow:0 3px 0 rgba(0,0,0,.55); }
+  .btn-secondary{ background:transparent; border-color:var(--gold-500); color:var(--gold-500); }
+  .btn-secondary:hover{ background:rgba(227,166,46,.1); }
+  .btn-ghost{
+    background:transparent; color:var(--text-secondary); text-decoration:underline;
+    text-underline-offset:3px; padding-left:4px; padding-right:4px;
+  }
+
+  .chip{
+    display:inline-flex; align-items:center; gap:6px;
+    font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+    font-size:11px; font-weight:600; letter-spacing:.04em; text-transform:uppercase;
+    padding:5px 11px; border-radius:var(--radius-pill);
+  }
+  .chip-gold{ background:rgba(227,166,46,.16); color:var(--gold-300); border:1px solid var(--gold-700); }
+  .chip-leaf{ background:rgba(134,185,68,.16); color:var(--leaf-300); border:1px solid var(--leaf-700); }
+  .chip-grape{ background:rgba(140,79,160,.18); color:var(--grape-300); border:1px solid var(--grape-700); }
+  .chip-neutral{ background:transparent; color:var(--text-tertiary); border:1px solid var(--border); text-decoration:line-through; }
+
+  .product-card{
+    display:grid; grid-template-columns:120px 1fr; gap:18px;
+    border:1px solid var(--border); background:var(--bg-surface); padding:18px;
+  }
+  .product-thumb{
+    background:var(--bg-panel); border:1px solid var(--border);
+    display:flex; align-items:center; justify-content:center;
+    font-family:"Arial Black",Arial,sans-serif; color:var(--gold-700); font-size:34px; font-weight:900; aspect-ratio:1;
+  }
+  .product-info h4{ margin:0 0 6px; font-size:15px; }
+  .product-price{
+    font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; font-size:15px;
+    font-variant-numeric:tabular-nums; color:var(--text-primary); margin:2px 0 12px;
+  }
+
+  .field-row{ display:flex; gap:10px; flex-wrap:wrap; }
+  .field{
+    font-family:inherit; font-size:13.5px; padding:11px 14px; background:var(--bg-panel);
+    border:1.5px solid var(--border); border-radius:var(--radius-tag); color:var(--text-primary); min-width:220px;
+  }
+  .field::placeholder{ color:var(--text-tertiary); }
+  .field:focus-visible{ outline:none; border-color:var(--gold-500); }
+
+  /* ---------------------------------------------------------
+     TOKENS TABLE
+  --------------------------------------------------------- */
+  .token-cols{ display:grid; grid-template-columns:1fr 1fr; gap:32px; }
+  @media (max-width:700px){ .token-cols{ grid-template-columns:1fr; } }
+  .token-table{ width:100%; border-collapse:collapse; }
+  .token-table td{ padding:7px 0; font-size:13px; border-bottom:1px solid var(--border-soft); }
+  .token-table td:first-child{ color:var(--text-secondary); }
+  .token-table td:last-child{
+    text-align:right; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+    font-variant-numeric:tabular-nums; color:var(--text-primary);
+  }
+
+  /* ---------------------------------------------------------
+     FOOTER
+  --------------------------------------------------------- */
+  .colophon{
+    margin-top:96px; padding-top:20px; border-top:1px solid var(--border-soft);
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;
+    font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+    font-size:11px; letter-spacing:.04em; text-transform:uppercase; color:var(--text-tertiary);
+  }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow">Brand &amp; Visual Identity System — v1.0</p>
+        <h1 class="wordmark">
+          <span class="line1">Phat</span>
+          <span class="line2">Ducky</span>
+        </h1>
+        <p class="tagline"><b>Gold teeth. Green thumb. Good business.</b> A mascot brand built on swagger — confident, a little cocky, always in on its own joke.</p>
+        <dl class="hero-meta">
+          <div><dt>Prepared for</dt><dd>Phat Ducky</dd></div>
+          <div><dt>Source mark</dt><dd class="mono">phat-ducky-logo.png · 3500×3500</dd></div>
+          <div><dt>Palette source</dt><dd class="mono">client-supplied Coolors export</dd></div>
+          <div><dt>Status</dt><dd>Master logo embedded</dd></div>
+        </dl>
+      </div>
+      <div class="hero-art">
+        <img src="assets/phat-ducky-logo.png" alt="Phat Ducky mascot full lockup" />
+      </div>
+    </div>
+  </section>
+
+  <!-- VOICE -->
+  <section class="plate">
+    <div class="plate-head">
+      <span class="plate-num">01</span>
+      <h2 class="plate-title">The Character</h2>
+      <span class="plate-sub">Voice &amp; Attitude</span>
+    </div>
+    <p class="lede">Phat Ducky is the mascot who already made it and isn't shy about it — gold fronts, a chain heavy enough to matter, a flat-brim cap cocked just enough. He talks like he runs the block, not like he runs a board meeting.</p>
+    <div class="voice-grid">
+      <div class="voice-card">
+        <h3>Confident, not corporate</h3>
+        <p>Short lines. No hedging, no filler words, no "just checking in." He says the thing once, and it lands.</p>
+      </div>
+      <div class="voice-card">
+        <h3>Deadpan grin</h3>
+        <p>The humor is dry and self-aware — cocky enough to be funny, never mean enough to punch down.</p>
+      </div>
+      <div class="voice-card">
+        <h3>Gold is earned, not sprayed</h3>
+        <p>Same rule on the page as around his neck: one gold moment per layout, never gold-on-gold-on-gold.</p>
+      </div>
+      <div class="voice-card">
+        <h3>Street vernacular, kept crisp</h3>
+        <p>Lean on real language ("cop this," "the drop," "fresh") — but every sentence still has to scan clean.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- COLOR -->
+  <section class="plate">
+    <div class="plate-head">
+      <span class="plate-num">02</span>
+      <h2 class="plate-title">Color System</h2>
+      <span class="plate-sub">5 Core + 3 Accent</span>
+    </div>
+    <p class="lede">Two layers. The five client-supplied tones build every surface, panel, and line of body copy — they're muted on purpose so nothing competes with the mark. Three saturated accents, pulled straight off the artwork, are reserved for moments that need to pop: calls to action, badges, drop alerts.</p>
+
+    <p class="section-label">Core Palette — surfaces &amp; text</p>
+    <div class="swatch-row">
+      <div class="swatch"><div class="swatch-fill" style="background:#E8E0CA"></div><div class="swatch-label"><p class="swatch-role">Bone</p><p class="swatch-hex">#E8E0CA</p></div></div>
+      <div class="swatch"><div class="swatch-fill" style="background:#80596A"></div><div class="swatch-label"><p class="swatch-role">Dusk</p><p class="swatch-hex">#80596A</p></div></div>
+      <div class="swatch"><div class="swatch-fill" style="background:#2E333C"></div><div class="swatch-label"><p class="swatch-role">Slate</p><p class="swatch-hex">#2E333C</p></div></div>
+      <div class="swatch"><div class="swatch-fill" style="background:#2A1F22"></div><div class="swatch-label"><p class="swatch-role">Umber</p><p class="swatch-hex">#2A1F22</p></div></div>
+      <div class="swatch"><div class="swatch-fill" style="background:#151A22"></div><div class="swatch-label"><p class="swatch-role">Ink</p><p class="swatch-hex">#151A22</p></div></div>
+    </div>
+    <p class="swatch-note" style="font-size:13px;color:var(--text-tertiary);max-width:64ch;">Bone is the paper. Ink and Umber are the jacket and cap — the darkest, most-used surfaces. Dusk is the quiet cousin of the hoodie purple: use it for dividers, disabled states, and secondary chips, never as a hero color.</p>
+
+    <p class="section-label">Mascot Accents — sampled from the artwork</p>
+    <div class="swatch-row accents">
+      <div class="swatch"><div class="swatch-fill" style="background:linear-gradient(160deg,#F4CE73,#E3A62E 55%,#8A5A18)"></div><div class="swatch-label"><p class="swatch-role">Gold</p><p class="swatch-hex">#E3A62E</p></div></div>
+      <div class="swatch"><div class="swatch-fill" style="background:#86B944"></div><div class="swatch-label"><p class="swatch-role">Leaf</p><p class="swatch-hex">#86B944</p></div></div>
+      <div class="swatch"><div class="swatch-fill" style="background:#8C4FA0"></div><div class="swatch-label"><p class="swatch-role">Grape</p><p class="swatch-hex">#8C4FA0</p></div></div>
+    </div>
+    <p class="swatch-note" style="font-size:13px;color:var(--text-tertiary);max-width:64ch;">Eyedropped from the chain, foliage, and hoodie in the submitted PNG — close, but confirm exact values against the master file before locking production tokens. Gold leads (CTAs, prices, the wordmark itself); Leaf and Grape are supporting players used one at a time.</p>
+  </section>
+
+  <!-- TYPE -->
+  <section class="plate">
+    <div class="plate-head">
+      <span class="plate-num">03</span>
+      <h2 class="plate-title">Typography</h2>
+      <span class="plate-sub">Display / Body / Tag</span>
+    </div>
+    <p class="lede">Three roles, three jobs. A heavyweight display face carries the swagger; a plain grotesk carries the reading; a monospace does the paperwork — hex codes, prices, hang-tag labels — like a stitched-in size tag.</p>
+
+    <div class="specimen">
+      <p class="display-line" style="font-size:44px;">Cop This Drop</p>
+      <p class="meta">Display — Arial Black / 900 / uppercase — hero lines, section titles, price call-outs</p>
+    </div>
+    <div class="specimen">
+      <p style="font-size:17px;line-height:1.65;max-width:56ch;color:var(--text-primary);margin:0 0 10px;">The mascot leads every layout, but the copy still has to hold up a paragraph. Body text runs in a plain, honest grotesk with no attitude of its own — it gets out of the way so the gold can do its job.</p>
+      <p class="meta">Body — system sans / 400–600 / 15–17px / 1.6 line-height</p>
+    </div>
+    <div class="specimen">
+      <p class="mono" style="font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--gold-500);margin:0 0 10px;">SKU 04D-GOLD · #E3A62E · LIMITED RUN</p>
+      <p class="meta">Tag / Mono — labels, hex values, SKUs, timestamps, table data</p>
+    </div>
+
+    <p class="section-label">Type Scale</p>
+    <table class="type-scale">
+      <thead><tr><th>Role</th><th>Size / Line</th><th>Weight</th><th>Case</th></tr></thead>
+      <tbody>
+        <tr><td>Hero wordmark</td><td class="num">64–96 / 0.86</td><td>900</td><td>UPPER</td></tr>
+        <tr><td>Plate title</td><td class="num">22 / 1.2</td><td>900</td><td>UPPER</td></tr>
+        <tr><td>Lede</td><td class="num">18 / 1.5</td><td>400</td><td>Sentence</td></tr>
+        <tr><td>Body</td><td class="num">15–17 / 1.6</td><td>400</td><td>Sentence</td></tr>
+        <tr><td>Tag / label</td><td class="num">11–13 / 1.4</td><td>600</td><td>UPPER, +.06em</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- LOGO USAGE -->
+  <section class="plate">
+    <div class="plate-head">
+      <span class="plate-num">04</span>
+      <h2 class="plate-title">Mark Usage</h2>
+      <span class="plate-sub">Lockups &amp; Clear Space</span>
+    </div>
+    <p class="lede">Three approved lockups. The full lockup below is the actual master file — Wordmark-only and Badge/Icon still need to be cut from source layers (this flattened PNG doesn't separate them).</p>
+
+    <div class="lockup-grid">
+      <div class="lockup-slot filled">
+        <img src="assets/phat-ducky-logo.png" alt="Phat Ducky full lockup" />
+        <span class="slot-name">Full Lockup</span>
+        <span class="slot-file">mascot + wordmark · min 120px wide</span>
+      </div>
+      <div class="lockup-slot">
+        <span class="plus">+</span>
+        <span class="slot-name">Wordmark Only</span>
+        <span class="slot-file">"Phat Ducky" gold lettering · min 80px wide</span>
+      </div>
+      <div class="lockup-slot">
+        <span class="plus">+</span>
+        <span class="slot-name">Badge / Icon</span>
+        <span class="slot-file">mascot bust, circular crop · min 32px</span>
+      </div>
+    </div>
+
+    <div class="clearspace">
+      <div class="clearspace-diagram">
+        <span class="arrow top">clear</span>
+        <div class="inner">D</div>
+        <span class="arrow bottom">clear</span>
+      </div>
+      <p>Clear space on every side equals the height of the gold <b>D</b> badge on the cap. Nothing — text, edge, other logos — sits inside that margin.</p>
+    </div>
+
+    <div class="rules-grid">
+      <div>
+        <h4>Do</h4>
+        <div class="rule-item"><span class="mark ok"></span><span>Keep the gold gradient intact — highlight to bronze, never a flat fill.</span></div>
+        <div class="rule-item"><span class="mark ok"></span><span>Place on Ink, Umber, or Bone grounds, where the outline holds contrast.</span></div>
+        <div class="rule-item"><span class="mark ok"></span><span>Give it room — honor the clear-space rule above, always.</span></div>
+      </div>
+      <div>
+        <h4>Don't</h4>
+        <div class="rule-item"><span class="mark no"></span><span>Recolor the mascot outside this palette — no brand pink, no neon blue.</span></div>
+        <div class="rule-item"><span class="mark no"></span><span>Stretch, skew, rotate, or add an outer glow beyond this spec.</span></div>
+        <div class="rule-item"><span class="mark no"></span><span>Set the wordmark in any face but the approved display weight.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMPONENTS -->
+  <section class="plate">
+    <div class="plate-head">
+      <span class="plate-num">05</span>
+      <h2 class="plate-title">Components</h2>
+      <span class="plate-sub">Buttons / Tags / Card</span>
+    </div>
+
+    <p class="section-label">Buttons</p>
+    <div class="comp-block">
+      <div class="comp-row">
+        <button class="btn btn-primary">Cop This</button>
+        <button class="btn btn-secondary">Notify Me</button>
+        <button class="btn btn-ghost">View Details</button>
+      </div>
+    </div>
+
+    <p class="section-label">Status Tags</p>
+    <div class="comp-block">
+      <div class="comp-row">
+        <span class="chip chip-gold">New Drop</span>
+        <span class="chip chip-grape">Limited</span>
+        <span class="chip chip-leaf">In Stock</span>
+        <span class="chip chip-neutral">Sold Out</span>
+      </div>
+    </div>
+
+    <p class="section-label">Product Card</p>
+    <div class="product-card">
+      <div class="product-thumb">D</div>
+      <div class="product-info">
+        <span class="chip chip-gold" style="margin-bottom:8px;display:inline-flex;">New Drop</span>
+        <h4>Phat Ducky Varsity Jacket</h4>
+        <p class="product-price">$128.00</p>
+        <button class="btn btn-primary">Cop This</button>
+      </div>
+    </div>
+
+    <p class="section-label">Form Field</p>
+    <div class="comp-block">
+      <div class="field-row">
+        <input class="field" type="email" placeholder="you@email.com" />
+        <button class="btn btn-primary">Get Drop Alerts</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- TOKENS -->
+  <section class="plate">
+    <div class="plate-head">
+      <span class="plate-num">06</span>
+      <h2 class="plate-title">Spacing &amp; Radius</h2>
+      <span class="plate-sub">Layout Tokens</span>
+    </div>
+    <div class="token-cols">
+      <table class="token-table">
+        <tbody>
+          <tr><td>space-1</td><td>4px</td></tr>
+          <tr><td>space-2</td><td>8px</td></tr>
+          <tr><td>space-3</td><td>12px</td></tr>
+          <tr><td>space-4</td><td>16px</td></tr>
+          <tr><td>space-5</td><td>24px</td></tr>
+          <tr><td>space-6</td><td>32px</td></tr>
+          <tr><td>space-7</td><td>48px</td></tr>
+        </tbody>
+      </table>
+      <table class="token-table">
+        <tbody>
+          <tr><td>radius-tag</td><td>2px — buttons, fields, swatches</td></tr>
+          <tr><td>radius-pill</td><td>999px — status chips only</td></tr>
+          <tr><td>border</td><td>1–1.5px, solid</td></tr>
+          <tr><td>shadow-hard</td><td>0 2px 0 — flat bevel, no blur</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <div class="colophon">
+    <span>Phat Ducky — Design System v1.0</span>
+    <span>Prepared 2026-07-11 · Draft for review</span>
+  </div>
+
+</div>
+</body>
+</html>

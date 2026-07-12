@@ -1,0 +1,15 @@
+{
+  "core": {
+    "bone":  { "hex": "#E8E0CA", "role": "paper / lightest surface" },
+    "dusk":  { "hex": "#80596A", "role": "quiet secondary, dividers, disabled state" },
+    "slate": { "hex": "#2E333C", "role": "mid-dark surface" },
+    "umber": { "hex": "#2A1F22", "role": "jacket/cap tone, darkest common surface" },
+    "ink":   { "hex": "#151A22", "role": "deepest background" }
+  },
+  "accents": {
+    "gold":  { "300": "#F4CE73", "500": "#E3A62E", "700": "#8A5A18", "role": "primary accent — CTAs, prices, wordmark" },
+    "leaf":  { "300": "#AED374", "500": "#86B944", "700": "#4C6B24", "role": "secondary accent, used sparingly" },
+    "grape": { "300": "#B57FC7", "500": "#8C4FA0", "700": "#5C2F6E", "role": "tertiary accent, used sparingly" }
+  },
+  "note": "Core palette is client-supplied (Coolors export). Accent values are eyedropped from the master mascot artwork and should be confirmed against isolated source layers before locking production tokens."
+}
