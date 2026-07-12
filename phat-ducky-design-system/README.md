@@ -15,10 +15,6 @@ tokens/
   colors.json         color tokens as structured JSON
 ```
 
-## Viewing it
-
-Open `index.html` in a browser, or enable **GitHub Pages** for this repo (Settings → Pages → Deploy from branch → `main` / root) to get a hosted link.
-
 ## Status
 
 - Core palette (Bone, Dusk, Slate, Umber, Ink) is client-supplied and final.
